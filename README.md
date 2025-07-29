@@ -1,32 +1,53 @@
-# 🧠 Text Summarization & Classification with Transformers
+# Summarization and Classification Project
 
-This project demonstrates the use of a pre-trained transformer model for text summarization and classification using the Hugging Face `transformers` library. Built in Google Colab.
+This project uses a pretrained transformer model to summarize and classify text data efficiently. It can be used for natural language processing tasks such as text summarization and topic classification.
 
-## 🔧 Features
+## Features
 
-- 📄 Summarizes long texts into concise summaries
-- 🏷️ Classifies input text into broad categories
-- 🔍 Based on pretrained models like BART or T5
+- Summarizes input text into a concise version
+- Classifies text into predefined categories
+- Uses Hugging Face transformers and pipelines
 
-## 🚀 How to Use
+## Installation
 
-Just open the notebook in [Google Colab](https://colab.research.google.com/) and run the cells.
-
-## 💾 Requirements
+You can run this project in Google Colab or locally with Python installed. Required packages:
 
 ```bash
-pip install transformers sentencepiece
+pip install transformers torch
 
-## 📌 Demo Output
+## Usage
+Here is a simple example of how to use the summarization and classification functions:
 
-**Example input:**
+from transformers import pipeline
 
-> Soft robotics integrates compliant materials and innovative design principles...
+# Load summarization pipeline
+summarizer = pipeline("summarization")
 
-**Summarized:**
+# Load text classification pipeline
+classifier = pipeline("text-classification")
 
-> Soft robotics uses soft materials and new design methods for adaptable robots.
+text = "Soft robotics integrates compliant materials and innovative design principles to create flexible and adaptive robotic systems."
 
----
+# Summarize
+summary = summarizer(text, max_length=50, min_length=10, do_sample=False)
+print("Summary:", summary[0]['summary_text'])
 
-Made with ❤️ using Hugging Face
+# Classify
+classification = classifier(text)
+print("Classification:", classification)
+
+
+Demo Output
+Original Text:
+Soft robotics integrates compliant materials and innovative design principles to create flexible and adaptive robotic systems.
+
+Summarized:
+Soft robotics uses soft materials and new design methods for adaptable robots.
+
+Classification Result:
+[{'label': 'TECHNOLOGY', 'score': 0.99}]
+
+License
+This project is licensed under the MIT License.
+
+
